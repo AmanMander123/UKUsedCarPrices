@@ -15,7 +15,7 @@ I wanted to better understand:
 There is 1 notebook available here to showcase work related to the above questions. The notebook contains a section of exploratory analysis in searching through the data pertaining to the questions above. There model development section is also contained in the notebook.
 
 ## Results
-Medium article currently under development to summarize the results. Coming soon.
+https://amandeep-mander.medium.com/an-analysis-on-used-car-prices-from-the-uk-6ba5c983407d
 
 ## Licensing, Authors, Acknowledgements
 https://www.kaggle.com/adityadesai13/used-car-dataset-ford-and-mercedes  
