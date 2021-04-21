@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<section class="hero is-primary is-bold is-medium">
+
+		<div class="container">
+
+	</div>
+
+	<p style="color:blue;font-size:20;text-align: center;"><b>Predicted Price of Vehicle</b></p>
+	<div class="results">
+
+        <h2 style="color:blue;text-align: center;"><span>&#163;</span>{{ prediction | round(2)  }}</h2>
+
+	</div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="../static/js/scripts.js"></script>
+{% endblock %}

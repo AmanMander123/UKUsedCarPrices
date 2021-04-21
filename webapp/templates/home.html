@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<section class="hero is-primary is-bold">
+
+      <a href="https://github.com/AmanMander123/UKUsedCarPrices">GitHub Link + Documentation</a>
+      <p>
+        Enter the vehicle information below and click Predict.
+      </p>
+
+  <div class="hero-body">
+
+
+    <div class="ml-container">
+
+		<form action="{{ url_for('predict')}}" method="POST">
+            <p>Enter Year of Model (integer)(e.g. 2016)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="year" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Mileage in Miles (integer)(e.g. 15000)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="mileage" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Road Tax in Pounds (integer)(e.g. 150)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="tax" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Miles Per Gallon  (integer)(e.g. 50)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="mpg" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Engine Size in Litres (decimal)(e.g. 1.4)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="engineSize" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Type of Transmission (e.g. Manual)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="transmission" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Fuel Type (e.g. Petrol)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="fueltype" rows="2" cols="50"></textarea>
+            <br/>
+
+            <p>Enter Make (e.g. Audi)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="make" rows="2" cols="50"></textarea>
+            <br/>
+
+
+            <p>Enter Model (e.g. A1)</p>
+            <!-- <input type="text" name="comment"/> -->
+            <textarea name="model" rows="2" cols="50"></textarea>
+            <br/>
+
+            <input type="submit" class="btn-info" value="Predict">
+	    </form>
+
+	</div>
+  </div>
+
+
+
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="../static/js/scripts.js"></script>
+{% endblock %}
