@@ -15,8 +15,8 @@ I wanted to better understand:
 After answering these questions, a model is developed and deployed.
 
 ## File Description
-UKUsedCarPricePrediction.ipynb - notebook containing the data exploration and model develop process
-api - flask app: backend API serving the model
+UKUsedCarPricePrediction.ipynb - notebook containing the data exploration and model develop process  
+api - flask app: backend API serving the model  
 web app - flask app: front end calling the API
 
 ## Articles
