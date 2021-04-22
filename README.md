@@ -20,7 +20,7 @@ api - flask app: backend API serving the model
 web app - flask app: front end calling the API
 
 ## Articles
-https://amandeep-mander.medium.com/an-analysis-on-used-car-prices-from-the-uk-6ba5c983407d
+https://amandeep-mander.medium.com/an-analysis-on-used-car-prices-from-the-uk-6ba5c983407d  
 https://amandeep-mander.medium.com/how-to-develop-a-full-stack-machine-learning-web-app-using-aws-lambda-flask-and-zappa-cf78e6454b08
 
 ## Licensing, Authors, Acknowledgements
