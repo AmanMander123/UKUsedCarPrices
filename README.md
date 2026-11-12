@@ -1,27 +1,38 @@
-# UK Used Car Prices
+# UK used car price estimator
 
-## Installation
-There should be no necessary libraries to run the notebook beyond the Anaconda distribution of Python. The code should run with no issues using Python versions 3.*.
-The requirement files for the api and web app are in their respective directories.
+A 2021 project that explored how mileage, vehicle age, and other listing attributes relate to used car prices. The web app lets someone enter a vehicle's details and see a model estimate. It uses historical data and is an engineering example, not a current valuation service.
 
-## Project Motivation
-For this project, I was interested in exploring the UK Used Car Dataset:  
-https://www.kaggle.com/adityadesai13/used-car-dataset-ford-and-mercedes  
-I wanted to better understand:
-1. What are the most available vehicles for sale in different price ranges?
-2. Which make of vehicles exhibit the most and least depreciation?
-3. How do the variables available in this dataset impact the price of the vehicle?
+## What I built
 
-After answering these questions, a model is developed and deployed.
+I used a [public UK car dataset](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes) to explore pricing patterns in the [notebook](UKUsedCarPricePrediction.ipynb). I put the fitted regression behind a Flask API and built a separate Flask web app that calls it. The original deployment used AWS Lambda.
 
-## File Description
-UKUsedCarPricePrediction.ipynb - notebook containing the data exploration and model develop process  
-api - flask app: backend API serving the model  
-web app - flask app: front end calling the API
+## Design tradeoff
 
-## Articles
-https://amandeep-mander.medium.com/an-analysis-on-used-car-prices-from-the-uk-6ba5c983407d  
-https://amandeep-mander.medium.com/how-to-develop-a-full-stack-machine-learning-web-app-using-aws-lambda-flask-and-zappa-cf78e6454b08
+Separating the form from the model API lets the same prediction service support other callers and lets each side change independently. It adds an HTTP boundary, so the web app needs to handle a missing or invalid prediction. The API URL is configurable so the local walkthrough does not depend on the historical deployment.
 
-## Licensing, Authors, Acknowledgements
-https://www.kaggle.com/adityadesai13/used-car-dataset-ford-and-mercedes  
+## Run the local sample
+
+From the repo root, with Python 3.11:
+
+```sh
+python3.11 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-demo.txt
+PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -v
+```
+
+For a browser walkthrough, activate the same environment in two terminals. Run `python -m api.app` in one and `python -m webapp.app` in the other. Open `http://127.0.0.1:5001/` and submit this example:
+
+| Year | Mileage | Tax | MPG | Engine size | Transmission | Fuel | Make | Model |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2018 | 30000 | 145 | 50 | 1.5 | Manual | Petrol | Ford | Fiesta |
+
+## What the check covers
+
+The smoke test submits the example through the web app, which calls a loopback API running the checked-in model, and checks that the result page contains a finite price. It does not check current market accuracy or the original AWS deployment.
+
+## Operating the app
+
+The web app defaults to `http://127.0.0.1:5000/` for its API. Set `PREDICTION_API_URL` before starting the web app to use a different endpoint. The historical dependency lists are kept in the API and web app directories; use the separate demo list for local inference. Only load the trusted model artifact from this repository. The checked-in model was saved with scikit-learn 0.22.2.post1, so the demo environment emits a [version compatibility warning](https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations).
+
+Historical references: [deployment write-up](https://amandeep-mander.medium.com/how-to-develop-a-full-stack-machine-learning-web-app-using-aws-lambda-flask-and-zappa-cf78e6454b08) and [data analysis](https://amandeep-mander.medium.com/an-analysis-on-used-car-prices-from-the-uk-6ba5c983407d). Neither is needed for the local demo.
